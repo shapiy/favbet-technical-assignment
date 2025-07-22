@@ -20,6 +20,14 @@ A modern test automation framework built with Playwright and TypeScript.
 └── .github/workflows/ # CI/CD workflows
 ```
 
+## Test Status
+
+### UI Tests
+
+![docs/status_e2e.png](docs/status_e2e.png)
+
+### API Tests
+
 ## Getting Started
 
 ### Prerequisites
