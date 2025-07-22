@@ -1,0 +1,49 @@
+
+{
+  "name": "playwright-test-project",
+  "version": "1.0.0",
+  "description": "Playwright Test Automation Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:chrome": "playwright test --project=chromium",
+    "test:api": "playwright test tests/api",
+    "test:e2e": "playwright test tests/e2e",
+    "test:parallel": "playwright test --workers=4",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "mcp:start": "echo 'MCP server will be set up separately'",
+    "mcp:test": "echo 'MCP testing will be configured separately'"
+  },
+  "keywords": [
+    "playwright",
+    "test",
+    "automation",
+    "e2e"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.40.1",
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-playwright": "^0.20.0",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "allure-playwright": "^2.10.0",
+    "winston": "^3.11.0"
+  }
+}

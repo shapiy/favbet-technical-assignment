@@ -1,0 +1,33 @@
+node_modules/
+dist/
+reports/
+test-results/
+playwright-report/
+playwright/.cache/
+.env
+.env.local
+.env.*.local
+*.log
+logs/
+screenshots/
+videos/
+downloads/
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+allure-results/
+allure-report/
+coverage/
+.nyc_output/
+
+# MCP related
+.mcp-logs/
+.mcp-cache/
+browsers/
+mcp-session/
+
+# Authentication state
+playwright/.auth/
