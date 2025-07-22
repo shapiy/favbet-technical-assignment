@@ -26,6 +26,10 @@ A modern test automation framework built with Playwright and TypeScript.
 
 ![docs/status_e2e.png](docs/status_e2e.png)
 
+### API tests
+
+![docs/status_api.png](docs/status_api.png)
+
 ### API Tests
 
 ## Getting Started
