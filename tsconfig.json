@@ -23,14 +23,6 @@
       "@helpers/*": ["src/helpers/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    "tests/**/*",
-    "playwright.config.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "reports"
-  ]
+  "include": ["src/**/*", "tests/**/*", "playwright.config.ts"],
+  "exclude": ["node_modules", "dist", "reports"]
 }

@@ -1,12 +1,8 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(find:*)"
-    ],
+    "allow": ["Bash(find:*)"],
     "deny": []
   },
-  "enabledMcpjsonServers": [
-    "playwright"
-  ],
+  "enabledMcpjsonServers": ["playwright"],
   "enableAllProjectMcpServers": true
 }

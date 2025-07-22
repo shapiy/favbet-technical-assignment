@@ -13,7 +13,7 @@ export default defineConfig({
     ['json', { outputFile: 'reports/json/results.json' }],
     ['junit', { outputFile: 'reports/junit/results.xml' }],
     ['list'],
-    ['allure-playwright', { outputFolder: 'reports/allure-results' }]
+    ['allure-playwright', { outputFolder: 'reports/allure-results' }],
   ],
   use: {
     baseURL: process.env.BASE_URL || 'https://favbet.ua',
@@ -26,7 +26,8 @@ export default defineConfig({
     locale: 'uk-UA',
     timezoneId: 'Europe/Kiev',
     viewport: { width: 1280, height: 720 },
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
   },
 
   projects: [
@@ -35,10 +36,10 @@ export default defineConfig({
       name: 'setup',
       testMatch: /.*\.setup\.ts/,
     },
-    
+
     {
       name: 'chromium',
-      use: { 
+      use: {
         ...devices['Desktop Chrome'],
         // Use saved auth state
         storageState: 'playwright/.auth/user.json',
@@ -52,7 +53,7 @@ export default defineConfig({
       use: {
         baseURL: process.env.API_BASE_URL || 'https://api.favbet.ua',
         extraHTTPHeaders: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json',
         },
       },

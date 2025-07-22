@@ -1,0 +1,47 @@
+name: Lint and Format Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Check TypeScript types
+        run: npx tsc --noEmit
+
+      - name: Check Prettier formatting
+        run: npm run format:check
+
+      - name: Run lint with auto-fix (for information)
+        run: npm run lint:fix
+        continue-on-error: true
+
+      - name: Check if auto-fix changed anything
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "❌ Code formatting issues found. Run 'npm run lint:fix' and 'npm run format' locally."
+            git diff
+            exit 1
+          else
+            echo "✅ All code is properly formatted and linted."
+          fi

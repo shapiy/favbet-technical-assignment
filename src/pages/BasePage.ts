@@ -42,7 +42,7 @@ export abstract class BasePage {
   async waitForPageLoad() {
     // Wait for the page to be fully loaded (DOM ready, but not waiting for network idle due to websockets)
     await this.page.waitForLoadState('domcontentloaded');
-    
+
     // Wait a bit more for any dynamic content to settle
     await this.page.waitForTimeout(1_000);
   }

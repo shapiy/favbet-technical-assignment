@@ -22,7 +22,7 @@ export class AuthHelper {
       username = testData.users.validUser.username,
       password = testData.users.validUser.password,
       rememberMe = false,
-      saveSession = true
+      saveSession = true,
     } = options;
 
     const loginPage = new LoginPage(page);
@@ -37,7 +37,7 @@ export class AuthHelper {
       // Navigate to homepage if not already there
       if (!page.url().includes('favbet.ua')) {
         await page.goto(testData.favbet.urls.homepage);
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
       }
 
       // Perform login
@@ -64,7 +64,6 @@ export class AuthHelper {
 
       logger.error('Login failed - user menu not found');
       return false;
-
     } catch (error) {
       logger.error('Login error:', error);
       return false;
@@ -81,14 +80,14 @@ export class AuthHelper {
         'button:has-text("Вихід")',
         'button:has-text("Logout")',
         '[class*="logout"]',
-        'a[href*="/logout"]'
+        'a[href*="/logout"]',
       ];
 
       for (const selector of logoutSelectors) {
         const logoutButton = page.locator(selector).first();
         if (await logoutButton.isVisible({ timeout: 3000 })) {
           await logoutButton.click();
-          await page.waitForLoadState('networkidle');
+          await page.waitForLoadState('domcontentloaded');
           logger.info('Logout successful');
           return;
         }
@@ -106,10 +105,10 @@ export class AuthHelper {
   static async saveAuthSession(page: Page): Promise<void> {
     try {
       const context = page.context();
-      
+
       // Save cookies
       const cookies = await context.cookies();
-      const authCookies = cookies.filter(cookie => 
+      const authCookies = cookies.filter(cookie =>
         this.AUTH_COOKIES.some(name => cookie.name.includes(name))
       );
 
@@ -141,10 +140,10 @@ export class AuthHelper {
         cookies: authCookies,
         localStorage,
         sessionStorage,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
 
-      await context.addInitScript((session) => {
+      await context.addInitScript(session => {
         window.localStorage.setItem('favbet-session', JSON.stringify(session));
       }, session);
 
@@ -186,7 +185,7 @@ export class AuthHelper {
       }
 
       // Restore storage
-      await context.addInitScript((data) => {
+      await context.addInitScript(data => {
         // Restore local storage
         if (data.localStorage) {
           Object.entries(data.localStorage).forEach(([key, value]) => {
@@ -204,7 +203,6 @@ export class AuthHelper {
 
       logger.info('Auth session restored');
       return true;
-
     } catch (error) {
       logger.error('Error restoring auth session:', error);
       return false;
@@ -216,10 +214,10 @@ export class AuthHelper {
    */
   static async ensureLoggedIn(page: Page, options: AuthOptions = {}): Promise<void> {
     const loginPage = new LoginPage(page);
-    
-    if (!await loginPage.isLoggedIn()) {
+
+    if (!(await loginPage.isLoggedIn())) {
       const loginSuccess = await this.login(page, options);
-      
+
       if (!loginSuccess) {
         throw new Error('Failed to login. Cannot proceed with test.');
       }

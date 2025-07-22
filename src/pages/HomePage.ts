@@ -23,10 +23,10 @@ export class HomePage extends BasePage {
   }
 
   async getMainHeadingText(): Promise<string> {
-    return await this.mainHeading.textContent() || '';
+    return (await this.mainHeading.textContent()) || '';
   }
 
   async getParagraphText(): Promise<string> {
-    return await this.paragraphText.textContent() || '';
+    return (await this.paragraphText.textContent()) || '';
   }
 }
